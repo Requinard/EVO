@@ -2,7 +2,7 @@ from django.conf.urls import url, patterns
 
 from views import *
 
-urlpatters = patterns(
+urlpatterns = patterns(
     '',
-    url(r'^', IndexView.as_view()),
+    url(r'^$', IndexView.as_view(), name="index"),
 )
