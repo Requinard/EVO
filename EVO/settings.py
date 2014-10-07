@@ -38,7 +38,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'public',
     'crispy_forms',
-    'debug_toolbar'
+    'debug_toolbar',
+    'guardian',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,3 +98,5 @@ TEMPLATE_DIRS = (
 CRISPY_TEMPLATE_PACK = "bootstrap"
 
 CRISPY_FAIL_SILENTLY = not DEBUG
+
+ANONYMOUS_USER_ID = 1
