@@ -76,4 +76,8 @@ class LogoutView(View):
             else:
                 messages.error(self.request, "Something went wrong during logging out.")
 
-        return redirect("public:index")
+        return redirect("public:index")\
+
+class TestView(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, "base.html", {})
