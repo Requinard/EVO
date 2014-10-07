@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'public',
     'crispy_forms',
+    'debug_toolbar'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,4 +89,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 
-CRISPY_TEMPLATE_ACK = "bootstrap"
+CRISPY_TEMPLATE_PACK = "bootstrap"
+
+CRISPY_FAIL_SILENTLY = not DEBUG

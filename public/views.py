@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View
+from .forms import LoginForm
 
 # Create your views here.
 class IndexView(View):
     def get(self, request):
-        return render(request, "test.html", {})
+        return render(request, "test.html", {"example_form": LoginForm})
