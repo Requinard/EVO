@@ -12,13 +12,13 @@ on_successfull_login = "admin:index"
 # Create your views here.
 class IndexView(View):
     def get(self, request):
-        if request.user is not None:
+        if self.request.user is not None:
             redirect(on_successfull_login)
-        return render(request, "test.html", {"login_form": LoginForm()})
+        return render(request, "public/index.html", {"login_form": LoginForm()})
     def post(self, *args, **kwargs):
-        if request.user is not None:
+        if self.request.user is not None:
             redirect(on_successfull_login)
-        return render(self.request, "test.html", {"login_form": LoginForm()})
+        return render(self.request, "public/index.html", {"login_form": LoginForm()})
 
 class LoginView(View):
     def get(self, request):
@@ -32,18 +32,32 @@ class LoginView(View):
 
         if form.is_valid:
             print form.cleaned_data
-            user_model = User.objects.get(email=form.cleaned_data['email'])
-            user = authenticate(username=user_model.username, password=form.cleaned_data['password'])
-            if user is not None:
-                if user.is_active:
-                    login(self.request, user)
-                    messages.success(self.request, "You were succesfully logged in.")
-                    return redirect(on_successfull_login)
+            try:
+                user_model = User.objects.get(email=form.cleaned_data['email'])
+
+                if user_model is None:
+                    user_model = User.objects.get(username=form.cleaned_data['email'])
+                    # Allow login with username instead of email
+
+                user = authenticate(username=user_model.username, password=form.cleaned_data['password'])
+                if user is not None:
+                    if user.is_active:
+                        login(self.request, user)
+                        messages.success(self.request, "You were succesfully logged in.")
+                        return redirect(on_successfull_login)
+                    else:
+                        messages.error(self.request, "Your account is disabled")
+                        return redirect("public:index")
                 else:
-                    messages.error(self.request, "Your account is disabled")
+                    messages.error(self.request, "Your email or password was incorrect.")
                     return redirect("public:index")
+            except:
+                print 'Invalid password'
+                messages.error(self.request, "Your email or password was incorrect.")
+                return redirect("public:index")
         else:
-            messages.error(self.request, "Your email or password was incorrect.")
+            print "invalid user"
+            messages.warning(self.request, "Your input was not valid.")
             return redirect("public:index")
 
 class LogoutView(View):
