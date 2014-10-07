@@ -95,7 +95,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 
-CRISPY_TEMPLATE_PACK = "bootstrap"
+CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 CRISPY_FAIL_SILENTLY = not DEBUG
 

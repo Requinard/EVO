@@ -30,12 +30,6 @@ class ExampleForm(forms.Form):
         required=True,
     )
 
-    favorite_color = forms.CharField(
-        label="What is your favorite color?",
-        max_length=80,
-        required=True,
-    )
-
     favorite_number = forms.IntegerField(
         label="Favorite number",
         required=False,
@@ -48,18 +42,23 @@ class ExampleForm(forms.Form):
 
 
 class LoginForm(forms.Form):
+    email = forms.CharField(
+        label="Email",
+        max_length=80,
+        required=True,
+        )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="Password",
+    )
+    remember_me = forms.BooleanField()
+
     def __init__(self, *args, **kwargs):
-        super(ExampleForm, self).__init__(*args, **kwargs)
-
+        super(LoginForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-
-        self.helper.form_id = 'id-exampleForm'
-        self.helper.form_class = 'form-control'
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
-
-        self.helper.add_input(Submit('submit', 'Submit'))
-
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
@@ -68,16 +67,5 @@ class LoginForm(forms.Form):
             'password',
             'remember_me',
             StrictButton('Sign in', css_class='btn-default'),
+            StrictButton('Cancel', css_class='btn-danger'),
         )
-
-    email = forms.CharField(
-        label="Email Address",
-        max_length=80,
-        required=True,
-    )
-
-    password = forms.PasswordInput(
-
-    )
-
-    remember_me = forms.CheckboxInput()
