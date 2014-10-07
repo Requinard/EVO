@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from .forms import LoginForm, ExampleForm
 
@@ -6,3 +6,7 @@ from .forms import LoginForm, ExampleForm
 class IndexView(View):
     def get(self, request):
         return render(request, "test.html", {"example_form": LoginForm()})
+
+class LoginView(View):
+    def get(self, request):
+        return redirect("public:index")

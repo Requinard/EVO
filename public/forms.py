@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
-from crispy_forms.bootstrap import StrictButton
+from crispy_forms.bootstrap import StrictButton, Field, FormActions
 
 
 class ExampleForm(forms.Form):
@@ -57,15 +57,21 @@ class LoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+
         self.helper.form_method = 'post'
-        self.helper.form_action = 'submit_survey'
+        self.helper.form_action = '/login/'
+
         self.helper.form_class = 'form-horizontal'
+
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
         self.helper.layout = Layout(
-            'email',
-            'password',
-            'remember_me',
-            StrictButton('Sign in', css_class='btn-default'),
-            StrictButton('Cancel', css_class='btn-danger'),
+           Field("email"),
+           Field("password"),
+           Field("remember_me"),
+
+           FormActions(
+               Submit('log_in', 'Log In', css_class=" btn-primary btn-block"),
+           )
         )
