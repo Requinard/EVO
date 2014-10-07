@@ -15,8 +15,17 @@
         <div class="col-lg-12 text-center">
             <h1>E-V-O Login</h1>
         </div>
+        {% if messages %}
+            <div class="col-sm-6 col-sm-offset-3">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="col-sm-6 col-sm-offset-3">
-            {% crispy example_form %}
+            {% crispy login_form %}
         </div>
     </div>
 </div>
