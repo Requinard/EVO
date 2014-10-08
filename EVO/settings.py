@@ -109,7 +109,7 @@ ANONYMOUS_USER_ID = 1
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'info',
-    messages.INFO: 'primary',
+    messages.INFO: 'info',
     messages.SUCCESS: 'success',
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',

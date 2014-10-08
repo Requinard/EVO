@@ -86,6 +86,7 @@ class RegisterView(View):
 
         if reg.is_valid():
             messages.success(self.request, "You have successfully registered!")
+            return redirect("public:index")
         else:
             messages.error(self.request, reg.errors)
             return redirect("public:register")
