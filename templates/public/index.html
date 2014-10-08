@@ -13,7 +13,8 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">
+        <div class="col-lg-12 page-header text-center">
+        <div class="col-lg-12 page-header text-center">
             <h1>E-V-O Login</h1>
         </div>
         {% if messages %}
@@ -27,6 +28,12 @@
         {% endif %}
         <div class="col-sm-6 col-sm-offset-3">
             {% crispy login_form %}
+        </div>
+
+        <div class="col-sm-12">
+            <hr />
+            <h3 class="text-center">Don't have an account yet?</h3>
+            <p>Don't worry. We've got you covered. Head on over to <a href="{% url 'public:register' %}" class="btn btn-default">Registration</a> </p>
         </div>
     </div>
 </div>
