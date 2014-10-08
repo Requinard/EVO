@@ -7,7 +7,7 @@ from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 
 
-on_successfull_login = "admin:index"
+on_successfull_login = "public:test"
 
 # Create your views here.
 class IndexView(View):
@@ -85,8 +85,16 @@ class RegisterView(View):
         reg = RegisterForm(self.request.POST)
 
         if reg.is_valid():
-            messages.success(self.request, "You have successfully registered!")
-            return redirect("public:index")
+            if reg.cleaned_data['password'] == reg.cleaned_data['password_repeat']:
+                user = User.objects.create_user(reg.cleaned_data['email'], reg.cleaned_data['email'], reg.cleaned_data['password'])
+                user.first_name = reg.cleaned_data['first_name']
+                user.last_name = reg.cleaned_data['last_name']
+                user.save()
+                messages.success(self.request, "You have successfully registered!")
+                return redirect("public:index")
+            else:
+                messages.error(self.request, "Your passwords did not match. Please make sure they are identical.")
+                return redirect("public:register")
         else:
             messages.error(self.request, reg.errors)
             return redirect("public:register")
