@@ -46,7 +46,7 @@ class LoginForm(forms.Form):
         label="Email",
         max_length=80,
         required=True,
-        )
+    )
 
     password = forms.CharField(
         widget=forms.PasswordInput,
@@ -63,15 +63,71 @@ class LoginForm(forms.Form):
 
         self.helper.form_class = 'form-horizontal'
 
-        self.helper.label_class = 'col-lg-2'
+        self.helper.label_class = 'col-lg-3'
         self.helper.field_class = 'col-lg-8'
 
         self.helper.layout = Layout(
-           Field("email"),
-           Field("password"),
-           Field("remember_me"),
+            Field("email"),
+            Field("password"),
+            Field("remember_me"),
 
-           FormActions(
-               Submit('log_in', 'Log In', css_class=" btn-primary btn-block"),
-           )
+            FormActions(
+                Submit('log_in', 'Log In', css_class=" btn-primary btn-block"),
+            )
         )
+
+
+class RegisterForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        helper = FormHelper()
+
+        helper.form_method = 'post'
+        helper.form_action = '/register/'
+
+        helper.form_class = "form-horizontal"
+
+        helper.label_class = 'col-sm-3'
+        helper.field_class = 'col-sm-8'
+
+        helper.layout = Layout(
+            Field("first_name"),
+            Field("last_name"),
+            Field("email"),
+            Field("password"),
+            Field("password_repeat"),
+
+            Submit("submit", "Submit", css_class="btn-primary btn-block")
+        )
+
+        self.helper = helper
+
+    first_name = forms.CharField(
+        label="What's your first name?",
+        max_length=30,
+        required=True,
+    )
+
+    last_name = forms.CharField(
+        label="What's your last name?",
+        max_length=30,
+        required=True
+    )
+
+    password = forms.CharField(
+        label="Password",
+        max_length=30,
+        widget=forms.PasswordInput,
+        required=True
+    )
+    password_repeat = forms.CharField(
+        label="Password (Repeat it)",
+        max_length=30,
+        widget=forms.PasswordInput,
+        required=True
+    )
+
+    email = forms.CharField(
+        max_length=30,
+        required=True,
+    )

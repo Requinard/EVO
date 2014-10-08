@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import View
 from django.http.response import HttpResponseForbidden
 from django.contrib import messages
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 
 on_successfull_login = "admin:index"
@@ -76,7 +76,19 @@ class LogoutView(View):
             else:
                 messages.error(self.request, "Something went wrong during logging out.")
 
-        return redirect("public:index")\
+        return redirect("public:index")
+
+class RegisterView(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, "public/register.html", {"form": RegisterForm()})
+    def post(self, *args, **kwargs):
+        reg = RegisterForm(self.request.POST)
+
+        if reg.is_valid():
+            messages.success(self.request, "You have successfully registered!")
+        else:
+            messages.error(self.request, reg.errors)
+            return redirect("public:register")
 
 class TestView(View):
     def get(self, *args, **kwargs):
