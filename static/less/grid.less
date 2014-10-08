@@ -8,6 +8,9 @@
 // Set the container width, and override it for fixed navbars in media queries.
 
 .container {
+  box-sizing: content-box;
+  padding: 0px 10px 20px 10px;
+  background-color: @container-bg;
   .container-fixed();
 
   @media (min-width: @screen-sm-min) {
