@@ -5,4 +5,4 @@ from django.http.response import HttpResponse
 # Create your views here.
 class IndexView(View):
     def get(self, *args, **kwargs):
-        return HttpResponse("Hi")
+        return render(self.request, "home/index.html", {})
