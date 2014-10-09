@@ -7,7 +7,7 @@ class Post(models.Model):
     owner = models.ForeignKey(User, verbose_name="Owner of this object")
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    group = models.ForeignKey(Group)
+    group = models.ForeignKey(Group, blank=True, null=True)
 
     ## Post data
     post_body = models.TextField()
