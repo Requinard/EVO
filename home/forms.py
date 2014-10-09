@@ -31,11 +31,17 @@ class SelfPostForm(forms.Form):
         super(SelfPostForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
 
-        self.helper.form_id = "create_new_post"
-        self.helper.form_class = "form-inline"
         self.helper.form_method = "post"
         self.helper.form_action = "/home/post/new/"
+
+        self.helper.form_id = "create_new_post"
+        self.helper.form_class = "form-inline"
+
         self.helper.form_show_labels = False
+
+        self.helper.layout = Layout(
+            Field("post_body")
+        )
 
     post_body = forms.CharField(
         label="",

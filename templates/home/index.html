@@ -10,7 +10,7 @@
         {% endfor %}
     </div>
     <div class="col-lg-4">
-        {{ create_post_form|crispy }}
+        {% crispy create_post_form %}
     </div>
 </div>
 {% endblock %}
