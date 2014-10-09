@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="{% static 'less/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <style>
         body {
@@ -37,8 +38,8 @@
         </div>
         <div class="collapse navbar-collapse navbar-right" id="navbar-collapsible">
             <ul class="navbar-nav nav">
-                <li class="dropdown">
-                    <a data-toggle="dropdown" href="#">Messages {{ messages|length }}</a>
+                <li class="dropdown"{% if messages|length %} style="background-color: #548630;"{% endif %}>
+                    <a data-toggle="dropdown" href="#"><i class="fa fa-envelope"></i> {{ messages|length }}</a>
 
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                         {% if messages %}
