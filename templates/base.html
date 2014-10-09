@@ -23,9 +23,17 @@
             <a class="navbar-brand pull-left" href="#">Hi {{ user.first_name|capfirst }}</a>
         </div>
 
+        <div class="collapse navbar-collaspe">
+            <ul class="navbar-nav nav">
+                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            </ul>
+        </div>
         <div class="collapse navbar-collapse navbar-right" id="navbar-collapsible">
             <ul class="navbar-nav nav">
-                <li><a href="{% url 'public:index' %}">Logout</a> </li>
+                {% if user.is_superuser %}
+                    <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                {% endif %}
+                <li><a href="{% url 'public:index' %}">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -33,7 +41,7 @@
 
 <div class="container">
     {% block content %}
-    <!-- Content goes here! -->
+        <!-- Content goes here! -->
     {% endblock %}
 </div>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
