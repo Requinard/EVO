@@ -35,7 +35,7 @@ class SelfPostForm(forms.Form):
         self.helper.form_action = "/home/post/new/"
 
         self.helper.form_id = "create_new_post"
-        self.helper.form_class = "form-inline"
+        self.helper.field_class = "col-lg-12"
 
         self.helper.form_show_labels = False
 

@@ -9,10 +9,12 @@ from .models import Post
 
 
 
+
 # Create your views here.
 class IndexView(View):
     def get(self, *args, **kwargs):
         context = {}
+        context['page_owner'] = self.request.user
         context['posts'] = Post.objects.filter(owner=self.request.user)
         context['create_post_form'] = SelfPostForm()
         return render(self.request, "home/index.html", context)
