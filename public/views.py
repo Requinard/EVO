@@ -101,4 +101,6 @@ class RegisterView(View):
 
 class TestView(View):
     def get(self, *args, **kwargs):
+        messages.success(self.request, "Testmessage")
+        messages.error(self.request,  "Testerror")
         return render(self.request, "base.html", {})

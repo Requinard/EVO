@@ -30,6 +30,19 @@
         </div>
         <div class="collapse navbar-collapse navbar-right" id="navbar-collapsible">
             <ul class="navbar-nav nav">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" href="#">Messages</a>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <li class=""><p class="navbar-text bg-{{ message.tags }}">{{ message }}</p></li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="bg-default">No messages</li>
+                        {% endif %}
+                    </ul>
+                </li>
                 {% if user.is_superuser %}
                     <li><a href="{% url 'admin:index' %}">Admin</a></li>
                 {% endif %}
