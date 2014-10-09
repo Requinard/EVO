@@ -15,6 +15,9 @@ class Post(models.Model):
     loc_long = models.FloatField()
     loc_verbose = models.TextField()
 
+    class Meta:
+        ordering = ("-date_created", "date_modified")
+
     def __str__(self):
         return self.post_body
 
