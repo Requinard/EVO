@@ -11,9 +11,9 @@ class Post(models.Model):
 
     ## Post data
     post_body = models.TextField()
-    loc_lat = models.FloatField()
-    loc_long = models.FloatField()
-    loc_verbose = models.TextField()
+    loc_lat = models.FloatField(default=0)
+    loc_long = models.FloatField(default=0)
+    loc_verbose = models.TextField(default="0")
 
     class Meta:
         ordering = ("-date_created", "date_modified")

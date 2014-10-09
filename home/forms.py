@@ -28,7 +28,7 @@ class SelfPostForm(forms.Form):
     Prints a form to self post
     """
     def __init__(self, *args, **kwargs):
-        super(PostForm, self).__init__(*args, **kwargs)
+        super(SelfPostForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
 
         self.helper.form_id = "create_new_post"
