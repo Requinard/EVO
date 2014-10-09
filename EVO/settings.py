@@ -38,11 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'public',
     'crispy_forms',
     'debug_toolbar',
     'guardian',
-    'actstream'
+    'actstream',
+    'public',
+    'home'
 )
 
 AUTHENTICATION_BACKENDS = (
