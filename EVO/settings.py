@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'debug_toolbar',
     'guardian',
+    'actstream'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -102,8 +103,6 @@ TEMPLATE_DIRS = (
 )
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
-
-CRISPY_FAIL_SILENTLY = not DEBUG
 
 ANONYMOUS_USER_ID = 1
 
