@@ -1,0 +1,48 @@
+<!-- Requires a post oject -->
+
+{% load humanize %}
+<div class="alert alert-info">
+    <div class="row">
+        <!-- TODO: link this to owner page -->
+        <div class="col-xs-1">
+            <img src="#">
+        </div>
+        <div class="col-xs-11">
+            <h4>{{ post.owner.get_full_name }}</h4>
+            <h5>{{ post.date_created|naturaltime }} - *({{ post.date_modified|naturaltime }})</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            {{ post|linebreaks }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="text" class="form-control form-inline">
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        {% if post.get_post_comments %}
+            {% for comment in post.get_post_comments %}
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <img src="#">
+                        </div>
+                        <div class="col-xs-11">
+                            <h4>{{ comment.owner.get_full_name }}</h4>
+                            {{ comment.post_body|linebreaks }}
+                            <p class="small">{{ comment.date_created|naturaltime }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-xs-12">
+            <p>It seems there are no comments yet.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>

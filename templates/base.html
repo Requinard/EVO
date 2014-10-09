@@ -1,5 +1,7 @@
 {% load staticfiles %}
 
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -7,6 +9,11 @@
     <title></title>
     <link rel="stylesheet" href="{% static 'less/bootstrap.min.css' %}">
     <meta name="viewport" content="width=device-width, user-scalable=no">
+    <style>
+        body {
+            padding-bottom: 50px;
+        }
+    </style>
 </head>
 <body>
 
