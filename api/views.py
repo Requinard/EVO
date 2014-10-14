@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from home.models import Settings
-from .serializers import UserSerializer, UserSettingsSerializers
+from home.models import Settings, Location
+from .serializers import UserSerializer, UserSettingsSerializers, UserLocationSerializers
 
 # Create your views here.
 
@@ -19,3 +19,7 @@ class UserSettingsViewSet(viewsets.ModelViewSet):
     """
     queryset = Settings.objects.all()
     serializer_class = UserSettingsSerializers
+
+class UserLocationViewSet(viewsets.ModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = UserLocationSerializers

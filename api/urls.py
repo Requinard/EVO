@@ -4,8 +4,9 @@ import views
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'user_settings', views.UserSettingsViewSet)
+router.register(r'user/users', views.UserViewSet)
+router.register(r'user/settings', views.UserSettingsViewSet)
+router.register(r'user/location', views.UserLocationViewSet)
 
 urlpatterns = patterns(
     '',
