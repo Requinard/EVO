@@ -3,3 +3,5 @@ from .models import *
 # Register your models here.
 admin.site.register(Post)
 admin.site.register(PostComment)
+admin.site.register(Settings)
+admin.site.register(Location)

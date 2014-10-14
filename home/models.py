@@ -10,9 +10,9 @@ class Settings(models.Model):
 class Location(models.Model):
     user = models.OneToOneField(User)
 
-    lat = models.DecimalField(max_digits=10, decimal_places=7)
-    lng = models.DecimalField(max_digits=10, decimal_places=7)
-    verbose_loc = models.CharField(max_length=300)
+    lat = models.DecimalField(max_digits=10, decimal_places=7, default=0)
+    lng = models.DecimalField(max_digits=10, decimal_places=7, default=0)
+    verbose_loc = models.CharField(max_length=300, default="")
 
 
 class Post(models.Model):
