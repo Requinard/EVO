@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 
 # Create your models here.
+class Settings(models.Model):
+    user = models.OneToOneField(User)
+
+    track_location = models.BooleanField(default=True)
+
 class Post(models.Model):
     ## Metadata
     owner = models.ForeignKey(User, verbose_name="Owner of this object")
