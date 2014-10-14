@@ -7,6 +7,14 @@ class Settings(models.Model):
 
     track_location = models.BooleanField(default=True)
 
+class Location(models.Model):
+    user = models.OneToOneField(User)
+
+    lat = models.DecimalField(max_digits=10, decimal_places=7)
+    lng = models.DecimalField(max_digits=10, decimal_places=7)
+    verbose_loc = models.CharField(max_length=300)
+
+
 class Post(models.Model):
     ## Metadata
     owner = models.ForeignKey(User, verbose_name="Owner of this object")
