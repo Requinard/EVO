@@ -51,9 +51,15 @@
                         {% endif %}
                     </ul>
                 </li>
+
+                <li id="response-location-updated">
+                    <a id="action-update-location" href="#">Location Update</a>
+                </li>
+
                 {% if user.is_superuser %}
                     <li><a href="{% url 'admin:index' %}">Admin</a></li>
                 {% endif %}
+
                 <li><a href="{% url 'public:index' %}">Logout</a></li>
             </ul>
         </div>

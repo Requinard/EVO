@@ -1,4 +1,5 @@
-$(document).ready(function () {
+$("#action-update-location").click(function(e){
+    e.preventDefault();
     if ("geolocation" in navigator) {
         console.log("Geolocation Available!");
         navigator.geolocation.getCurrentPosition(function (pos) {
@@ -32,8 +33,12 @@ $(document).ready(function () {
                     success: function (response) {
                         console.log(response);
                         console.log("Succesfully PUT location data.")
+
+
                     }
                 })
+                $("#response-location-updated").addClass("bg-info");
+                $("#action-update-location").text("Updated!");
             });
 
 
@@ -41,4 +46,4 @@ $(document).ready(function () {
     } else {
         console.log("Geolocation Unavailable!");
     }
-})
+});
