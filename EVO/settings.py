@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'guardian',
     'actstream',
+    'rest_framework',
     'public',
     'home'
 )
@@ -116,4 +117,12 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'success',
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
