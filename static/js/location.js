@@ -6,15 +6,14 @@ $(document).ready(function () {
             console.log("lng: " + pos.coords.longitude);
             console.log(pos);
             var reverse_payload = {
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude,
-                username: "demo"
+                latlng: pos.coords.latitude + "," + pos.coords.longitude,
+                key: "AIzaSyDDOJStRQzhlys5a_ffsJMekYtaQYkDwLQ"
             }
 
-            var reverse_url = "http://api.geonames.org/findNearbyJSON"
+            var reverse_url = "https://maps.googleapis.com/maps/api/geocode/json"
 
             $.get(reverse_url, reverse_payload, function(response){
-                console.log(response)
+                console.log(response.results[0].formatted_address)
             })
 
         })
