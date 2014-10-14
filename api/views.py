@@ -5,6 +5,8 @@ from home.models import Settings, Location
 from .serializers import UserSerializer, UserSettingsSerializers, UserLocationSerializers
 
 # Create your views here.
+def exception_handler(exc):
+    print exc
 
 class UserViewSet(viewsets.ModelViewSet):
     """
