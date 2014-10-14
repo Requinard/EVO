@@ -18,19 +18,20 @@ $(document).ready(function () {
                 var location_verbose = response.results[0].formatted_address;
 
                 var location_payload = {
-                    "id": 2,
-                    "user": 2,
+                    "id": user_location_id,
+                    "user": user_id,
                     "lat": pos.coords.latitude.toString(),
                     "lng": pos.coords.longitude.toString(),
                     "verbose_loc": location_verbose
                 };
 
                 $.ajax({
-                    url: "/api/user/location/2/",
+                    url: "/api/user/location/" + user_location_id + "/",
                     type: "PUT",
                     data: location_payload,
                     success: function (response) {
                         console.log(response);
+                        console.log("Succesfully PUT location data.")
                     }
                 })
             });
