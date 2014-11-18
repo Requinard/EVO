@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from home.models import Settings, Location
+from home.models import UserSettings, UserLocation
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,8 +9,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserSettingsSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Settings
+        model = UserSettings
 
 class UserLocationSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Location
+        model = UserLocation

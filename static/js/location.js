@@ -1,4 +1,4 @@
-$("#action-update-location").click(function(e){
+$("#action-update-location").click(function (e) {
     e.preventDefault();
     if ("geolocation" in navigator) {
         console.log("Geolocation Available!");
