@@ -47,7 +47,8 @@ INSTALLED_APPS = (
     'actstream',
     'rest_framework',
     'public',
-    'home'
+    'home',
+    'users'
 )
 
 AUTHENTICATION_BACKENDS = (

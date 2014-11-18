@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from home.models import UserSettings, UserLocation
+from users.models import UserSettings, UserLocation
 from .serializers import UserSerializer, UserSettingsSerializers, UserLocationSerializers
 
 # Create your views here.

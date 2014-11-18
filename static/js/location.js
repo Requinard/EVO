@@ -1,4 +1,7 @@
 $("#action-update-location").click(function (e) {
+
+    var userID = document.getElementById("user_account_id").innerHTML;
+
     e.preventDefault();
     if ("geolocation" in navigator) {
         console.log("Geolocation Available!");
@@ -19,15 +22,15 @@ $("#action-update-location").click(function (e) {
                 var location_verbose = response.results[0].formatted_address;
 
                 var location_payload = {
-                    "id": user_location_id,
-                    "user": user_id,
+                    "id": userID,
+                    "user": userID,
                     "lat": pos.coords.latitude.toString(),
                     "lng": pos.coords.longitude.toString(),
                     "verbose_loc": location_verbose
                 };
 
                 $.ajax({
-                    url: "/api/user/location/" + user_location_id + "/",
+                    url: "/api/user/location/" + userID + "/",
                     type: "PUT",
                     data: location_payload,
                     success: function (response) {
