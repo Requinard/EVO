@@ -24,7 +24,7 @@ class UserSettings(models.Model):
             user_profile.delete()
 
 class UserLocation(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name="location")
 
     lat = models.DecimalField(max_digits=10, decimal_places=7, default=0)
     lng = models.DecimalField(max_digits=10, decimal_places=7, default=0)
@@ -40,3 +40,6 @@ class UserLocation(models.Model):
         if instance:
             user_profile = UserLocation.objects.get(user=instance)
             user_profile.delete()
+
+    def __unicode__(self):
+        return self.verbose_loc
