@@ -7,12 +7,12 @@ from django.contrib import messages
 from .forms import LoginForm, RegisterForm
 
 
-on_successfull_login = "public:test"
+on_successfull_login = "home:index"
 
 # Create your views here.
 class IndexView(View):
     def get(self, request):
-        if self.request.user is not None:
+        if request.user is not None:
             redirect(on_successfull_login)
         return render(request, "public/index.html", {"login_form": LoginForm()})
     def post(self, *args, **kwargs):
