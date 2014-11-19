@@ -29,11 +29,11 @@ $("#action-update-location").click(function (e) {
 
                 // Prepare our location payload to report to the API
                 var location_payload = {
-                    "id": 3,
-                    "user":3,
+                    "id": +userID,
+                    "user":+userID,
                     "lat": pos.coords.latitude,
                     "lng": pos.coords.longitude,
-                    "verbose_loc": location_verbose
+                    "verbose_loc": "test"
                 };
 
 
@@ -50,6 +50,10 @@ $("#action-update-location").click(function (e) {
                     success: function (response) {
                         $("#response-location-updated").addClass("bg-info");
                         $("#action-update-location").text("Updated!");
+                    },
+                    error: function(response){
+                        alert(response);
+                        console.log(response);
                     }
                 })
             });
