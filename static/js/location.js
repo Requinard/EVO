@@ -1,47 +1,57 @@
 $("#action-update-location").click(function (e) {
-
-    var userID = document.getElementById("user_account_id").innerHTML;
-
     e.preventDefault();
-    if ("geolocation" in navigator) {
-        console.log("Geolocation Available!");
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            console.log("lat: " + pos.coords.latitude);
-            console.log("lng: " + pos.coords.longitude);
-            console.log(pos);
 
+    // Get User data
+    var userID = getUserId();
+    var csrf_token = getCookie("csrftoken");
+
+
+    // Check if we can see location
+    if ("geolocation" in navigator) {
+
+        // Poll for current position
+        navigator.geolocation.getCurrentPosition(function (pos) {
+
+            // Create a payload to get an estimated address from google
             var reverse_payload = {
                 latlng: pos.coords.latitude + "," + pos.coords.longitude,
                 key: "AIzaSyDDOJStRQzhlys5a_ffsJMekYtaQYkDwLQ"
             };
 
+            // Google's geocoding API
             var reverse_url = "https://maps.googleapis.com/maps/api/geocode/json";
 
+            // Ask google nicely if we can have an address
             $.get(reverse_url, reverse_payload, function (response) {
-                console.log(response)
+
+                // Save our verbose location
                 var location_verbose = response.results[0].formatted_address;
 
+                // Prepare our location payload to report to the API
                 var location_payload = {
-                    "id": userID,
-                    "user": userID,
-                    "lat": pos.coords.latitude.toString(),
-                    "lng": pos.coords.longitude.toString(),
+                    "id": 3,
+                    "user":3,
+                    "lat": pos.coords.latitude,
+                    "lng": pos.coords.longitude,
                     "verbose_loc": location_verbose
                 };
 
+
+                // Add CSRF header to our AJAX request
+                $.ajaxSetup({
+                    headers: { "X-CSRFToken":csrf_token }
+                });
+
+                // Send our data payload to the API
                 $.ajax({
                     url: "/api/user/location/" + userID + "/",
                     type: "PUT",
                     data: location_payload,
                     success: function (response) {
-                        console.log(response);
-                        console.log("Succesfully PUT location data.")
-
-
+                        $("#response-location-updated").addClass("bg-info");
+                        $("#action-update-location").text("Updated!");
                     }
                 })
-                $("#response-location-updated").addClass("bg-info");
-                $("#action-update-location").text("Updated!");
             });
 
 
