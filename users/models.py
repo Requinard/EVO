@@ -13,15 +13,15 @@ class UserSettings(models.Model):
         return self.user.username
 
     @receiver(post_save, sender=User)
-    def create_profile_for_user(sender, instance=None, created=False, **kwargs):
+    def create_settings_for_user(sender, instance=None, created=False, **kwargs):
         if created:
             UserSettings.objects.get_or_create(user=instance)
 
     @receiver(pre_delete, sender=User)
-    def delete_profile_for_user(sender, instance=None, **kwargs):
+    def delete_settings_for_user(sender, instance=None, **kwargs):
         if instance:
-            user_profile = UserSettings.objects.get(user=instance)
-            user_profile.delete()
+            user_settings = UserSettings.objects.get(user=instance)
+            user_settings.delete()
 
 class UserLocation(models.Model):
     user = models.OneToOneField(User, related_name="location")
@@ -31,15 +31,30 @@ class UserLocation(models.Model):
     verbose_loc = models.CharField(max_length=300, default="")
 
     @receiver(post_save, sender=User)
-    def create_profile_for_user(sender, instance=None, created=False, **kwargs):
+    def create_location_for_user(sender, instance=None, created=False, **kwargs):
         if created:
             UserLocation.objects.get_or_create(user=instance)
 
     @receiver(pre_delete, sender=User)
-    def delete_profile_for_user(sender, instance=None, **kwargs):
+    def delete_location_for_user(sender, instance=None, **kwargs):
         if instance:
-            user_profile = UserLocation.objects.get(user=instance)
-            user_profile.delete()
+            user_location = UserLocation.objects.get(user=instance)
+            user_location.delete()
 
     def __unicode__(self):
         return self.verbose_loc
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, related_name="profile")
+
+
+    @receiver(post_save, sender=User)
+    def create_profile_for_user(sender, instance=None, created=False, **kwargs):
+        if created:
+            UserProfile.objects.get_or_create(user=instance)
+
+    @receiver(pre_delete, sender=User)
+    def delete_profile_for_user(sender, instance=None, **kwargs):
+        if instance:
+            user_profile = UserProfile.objects.get(user=instance)
+            user_profile.delete()

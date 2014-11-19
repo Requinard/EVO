@@ -36,6 +36,9 @@ $("#action-update-location").click(function (e) {
                     "verbose_loc": location_verbose
                 };
 
+                if (location_payload.verbose_loc === "")
+                    location_payload.verbose_loc = "Unknown";
+
 
                 // Add CSRF header to our AJAX request
                 $.ajaxSetup({
