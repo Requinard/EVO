@@ -11,6 +11,9 @@ from .models import Post
 
 
 # Create your views here.
+"""
+Shows a user's own page
+"""
 class IndexView(View):
     def get(self, *args, **kwargs):
         context = {}

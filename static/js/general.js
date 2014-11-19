@@ -18,3 +18,10 @@ function getUserId(){
     var user_id = document.getElementById("user_account_id").innerHTML;
     return user_id;
 }
+
+function setAjaxCSRF(){
+    var csrf_token = getCookie("csrftoken")
+    $.ajaxSetup({
+        headers: { "X-CSRFToken":csrf_token }
+    });
+}

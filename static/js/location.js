@@ -33,7 +33,7 @@ $("#action-update-location").click(function (e) {
                     "user":+userID,
                     "lat": pos.coords.latitude,
                     "lng": pos.coords.longitude,
-                    "verbose_loc": "test"
+                    "verbose_loc": location_verbose
                 };
 
 
