@@ -4,6 +4,20 @@ from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 
 # Create your models here.
+class Friendship(models.Model):
+    user_sent = models.ForeignKey(User, related_name="inviter")
+    user_received = models.ForeignKey(User, related_name="invitee")
+    accepted = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return "%s requested to %s" % (self.user_sent, self.user_received)
+
+    def DetermineRelation(self, user1, user2):
+        relation = Friendship.objects.filter(user_sent=user1).filter(user_received=user2).filter(accepted=True)
+        relation += Friendship.objects.filter(user_sent=user2).filter(user_received=user1).filter(accepted=True)
+
+        return relation
+
 class UserSettings(models.Model):
     user = models.OneToOneField(User, related_name="settings")
 

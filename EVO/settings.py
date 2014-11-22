@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'public',
     'home',
-    'users'
+    'users',
+    'groups'
 )
 
 AUTHENTICATION_BACKENDS = (
