@@ -10,6 +10,9 @@ class Friendship(models.Model):
     accepted = models.BooleanField(default=False)
     seen = models.BooleanField(default=False)
 
+    created_date = models.DateTimeField(auto_created=True)
+    last_accessed_date = models.DateTimeField(auto_now=True)
+
     def __unicode__(self):
         return "%s requested to %s" % (self.user_sent, self.user_received)
 
@@ -74,6 +77,16 @@ class Friendship(models.Model):
         self.seen = True
         self.accepted = True
         self.save()
+
+
+    """
+    Creates a new friendship request
+    """
+    def create_request(self, user_sending, user_receiving):
+        self.user_sent = user_sending
+        self.user_received = user_receiving
+
+
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, related_name="settings")
