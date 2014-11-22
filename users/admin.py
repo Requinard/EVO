@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(UserSettings)
 admin.site.register(UserLocation)
 admin.site.register(UserProfile)
+admin.site.register(Friendship)

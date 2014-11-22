@@ -8,15 +8,72 @@ class Friendship(models.Model):
     user_sent = models.ForeignKey(User, related_name="inviter")
     user_received = models.ForeignKey(User, related_name="invitee")
     accepted = models.BooleanField(default=False)
+    seen = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s requested to %s" % (self.user_sent, self.user_received)
 
+
+    """
+    Determines if 2 users have a friendship
+    """
     def DetermineRelation(self, user1, user2):
         relation = Friendship.objects.filter(user_sent=user1).filter(user_received=user2).filter(accepted=True)
         relation += Friendship.objects.filter(user_sent=user2).filter(user_received=user1).filter(accepted=True)
 
-        return relation
+        if len(relation) > 0:
+            return True
+
+        return False
+
+    """
+    Returns pending request that were sent by the user
+    """
+    def get_sent_pending_requests(self, user):
+        return Friendship.objects.filter(seen=False).filter(user_sent=user)
+
+    """
+    Returns pending requests that are waiting for a user
+    """
+    def get_received_pending_requests(self, user):
+        return Friendship.objects.filter(seen=False).filter(user_received=user)
+
+    """
+    Get all accepted friend request that this user sent
+    """
+    def get_accepted_sent_request(self,user):
+        return Friendship.objects.filter(seen=True).filter(accepted=True).filter(user_sent=user)
+
+    """
+    Get all accepted friend request that the user received
+    """
+    def get_accepted_received_requests(self, user):
+        return Friendship.objects.filter(seen=True).filter(accepted=True).filter(user_received=user)
+
+    """
+    Gets all of a users friends
+    """
+    def get_user_friends(self, user):
+        sent = Friendship.get_accepted_sent_request()
+        received = Friendship.get_accepted_received_requests()
+
+        return sent + received
+
+    """
+    Declines a request
+    """
+    def set_request_declined(self):
+        self.seen = True
+        self.accepted = False
+        self.save()
+
+    """
+    Accepts a request
+    """
+    def set_request_accepted(self):
+        self.seen = True
+        self.accepted = True
+        self.save()
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, related_name="settings")
